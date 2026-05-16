@@ -1,0 +1,111 @@
+.admin-dashboard {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding-bottom: 50px;
+}
+
+.admin-header {
+  background-color: var(--color-dark-charcoal);
+  color: var(--color-white);
+  padding: 20px 0;
+  margin-bottom: 40px;
+}
+
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-flex h1 {
+  color: var(--color-white);
+  font-size: 24px;
+}
+
+.logout-btn {
+  color: var(--color-white);
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: var(--color-gold);
+}
+
+.bookings-section h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.table-wrapper {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  overflow-x: auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  background-color: #f1f1f1;
+  padding: 15px 20px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+td {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.client-info strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.client-info span {
+  display: block;
+  color: #666;
+  font-size: 12px;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.pending {
+  background-color: #fff4e5;
+  color: #b27b16;
+}
+
+.delete-btn {
+  color: #d32f2f;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.no-data {
+  text-align: center;
+  padding: 50px;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .admin-header {
+    padding-top: 100px;
+  }
+}

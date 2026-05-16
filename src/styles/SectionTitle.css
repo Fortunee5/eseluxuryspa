@@ -1,0 +1,55 @@
+.section-title {
+  margin-bottom: 50px;
+}
+
+.section-title.center {
+  text-align: center;
+}
+
+.section-title.left {
+  text-align: left;
+}
+
+.section-title .subtitle {
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.section-title h2 {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.title-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.section-title.left .title-separator {
+  justify-content: flex-start;
+}
+
+.title-separator span {
+  width: 50px;
+  height: 1px;
+  background-color: var(--color-gold);
+}
+
+.title-separator .dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-gold);
+  transform: rotate(45deg);
+}
+
+@media (max-width: 768px) {
+  .section-title h2 {
+    font-size: 32px;
+  }
+}
