@@ -7,32 +7,32 @@ const services = [
   {
     title: 'Massage Therapy',
     image: 'https://i.pinimg.com/1200x/af/1c/80/af1c8063400cbb7b2cb5bfdee9180eeb.jpg',
-    description: 'Release tension and find deep relaxation with our professional massage techniques.'
+    description: null,
   },
   {
-    title: 'Facial Treatment',
-    image: 'https://i.pinimg.com/1200x/26/e4/d2/26e4d2cf52534582c6fe7734cbb28b66.jpg',
-    description: 'Restore your natural glow with our customized skin treatments and premium products.'
+    title: 'Teeth Whitening',
+    image: 'https://i.pinimg.com/1200x/d2/3e/35/d23e35fcc7a12726a5dd39913b0ddd09.jpg',
+    description: null,
   },
   {
-    title: 'Aromatherapy',
-    image: 'https://i.pinimg.com/1200x/57/ff/08/57ff08813e13309fc6b8ae855e4e2982.jpg',
-    description: 'Balance your senses with essential oils curated to enhance your physical and emotional well-being.'
+    title: 'Lip Blush',
+    image: 'https://i.pinimg.com/1200x/d8/e7/90/d8e7904b237cc670ab83256e5b346a35.jpg',
+    description: null,
   },
   {
-    title: 'Sauna Therapy',
-    image: 'https://i.pinimg.com/736x/eb/e2/3f/ebe23fc5ab075b05c33c2b7ccf9a1166.jpg',
-    description: 'Detoxify and improve circulation in our state-of-the-art luxury sauna facilities.'
+    title: 'Fat Injection',
+    image: 'https://i.pinimg.com/1200x/e8/10/df/e810df83272455f4b9107eec56dcf3cb.jpg',
+    description: null,
   },
   {
-    title: 'Body Treatment',
-    image: 'https://i.pinimg.com/1200x/fe/fd/c6/fefdc663959f2d1bfd0da05fd1d3e3d2.jpg',
-    description: 'Exfoliate and nourish your skin with our signature body scrubs and wraps.'
+    title: 'Pedicure',
+    image: 'https://i.pinimg.com/736x/c5/01/3b/c5013bd7012c81b6557b3e4325af8295.jpg',
+    description: null,
   },
   {
-    title: 'Wellness Therapy',
-    image: 'https://i.pinimg.com/1200x/ba/2b/03/ba2b036f657338a8aa2528c2d9ec393a.jpg',
-    description: 'Holistic approaches to wellness including yoga, meditation, and nutritional advice.'
+    title: 'Nano Peel',
+    image: 'https://i.pinimg.com/1200x/9a/3a/24/9a3a24993681a0505dff8629885419bc.jpg',
+    description:null,
   }
 ];
 

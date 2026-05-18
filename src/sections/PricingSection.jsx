@@ -5,20 +5,20 @@ import '../styles/PricingSection.css';
 
 const plans = [
   {
-    name: 'Relaxation Day',
-    price: '2,000',
-    features: ['Massage Therapy', 'Sauna Access', 'Herbal Tea', 'Refreshing Facial'],
+    name: 'Teeth Whitening',
+    price: '300',
+    features: ['Oral Examination', 'Scaling', 'Polishing', 'Flossing and Rinsing'],
     featured: false
   },
   {
     name: 'Luxury Wellness',
-    price: '5,000',
+    price: '500',
     features: ['Deep Tissue Massage', 'Full Body Scrub', 'Luxury Facial', 'Sauna & Pool', 'Healthy Lunch'],
     featured: true
   },
   {
-    name: 'Ultimate Escape',
-    price: '4,500',
+    name: 'Fat Injections',
+    price: '700',
     features: ['Full Day Access', 'All Treatments', 'Private Suite', 'Premium Gift Set', 'Champagne'],
     featured: false
   }

@@ -150,8 +150,8 @@ const Booking = () => {
             </div>
             <div className="info-box">
               <h3>Contact Info</h3>
-              <p>123 Luxury Way, Victoria Island, Lagos</p>
-              <p>+234 800 ESE SPA</p>
+              <p>61 lokko road osu beside karena cake, Accra, Ghana</p>
+              <p>0534533217 0500169264</p>
               <p>reservations@esespa.com</p>
             </div>
           </div>

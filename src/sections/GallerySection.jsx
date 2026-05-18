@@ -1,7 +1,17 @@
 import React, { useRef, useEffect } from 'react';
 import SectionTitle from '../components/SectionTitle';
 import '../styles/GallerySection.css';
-
+import img1 from '../images/1.jpeg';
+import img2 from '../images/2.jpeg';
+import img3 from '../images/3.jpeg';
+import img4 from '../images/4.jpeg';
+import img5 from '../images/5.jpeg';
+import img6 from '../images/6.jpeg';
+import img7 from '../images/7.jpeg';
+import img8 from '../images/8.jpeg';
+import img9 from '../images/9.jpeg';
+import img10 from '../images/10.jpeg';
+import img43 from '../images/43.jpeg';
 const row1 = [
   'https://i.pinimg.com/736x/9a/b2/d3/9ab2d33761639c9028c9d07bce52299d.jpg',
   'https://i.pinimg.com/1200x/5c/54/f6/5c54f6a5185c228917e07ef0e4c76b0e.jpg',
@@ -12,12 +22,18 @@ const row1 = [
 ];
 
 const row2 = [
-  'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=800&q=80',
-  'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&q=80',
-  'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
-  'https://images.unsplash.com/photo-1552693673-1bf958298935?w=800&q=80',
-  'https://i.pinimg.com/1200x/5c/54/f6/5c54f6a5185c228917e07ef0e4c76b0e.jpg',
-  'https://i.pinimg.com/1200x/bd/91/e1/bd91e141e64b0cd32cf36c428fa1a595.jpg',
+img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9,
+  img10,
+  img43,
+  
 ];
 
 const col1 = [
@@ -28,10 +44,17 @@ const col1 = [
 ];
 
 const col2 = [
-  'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
-  'https://i.pinimg.com/1200x/bd/91/e1/bd91e141e64b0cd32cf36c428fa1a595.jpg',
-  'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=800&q=80',
-  'https://i.pinimg.com/1200x/5c/54/f6/5c54f6a5185c228917e07ef0e4c76b0e.jpg',
+img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9,
+  img10,
+  img43,
 ];
 
 const MarqueeRow = ({ images, direction = 'left', speed = 40 }) => {
