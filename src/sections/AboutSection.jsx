@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import SectionTitle from '../components/SectionTitle';
 import Button from '../components/Button';
 import '../styles/AboutSection.css';
-
+import img21 from '../images/gh1.jpeg';
 const stats = [
   { target: 10,   suffix: '+',  label: 'Years of Experience' },
   { target: 60,   suffix: '+',  label: 'Luxury Treatments' },
@@ -53,7 +53,7 @@ const AboutSection = () => {
         <div className="about-grid">
           <div className="about-images">
             <div className="img-large">
-              <img src="https://i.pinimg.com/1200x/3b/4e/ab/3b4eabe03afef3601dbc7c2023c57706.jpg" alt="Spa Scene" />
+              <img src={img21} alt="Spa Scene" />
             </div>
             <div className="img-small floating">
               <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxEME9M9cSy9FvfHvcx2gMPkp1H5Dj4YaKufPRsAyon8Tf" alt="Spa Detail" />

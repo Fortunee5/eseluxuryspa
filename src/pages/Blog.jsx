@@ -1,24 +1,28 @@
 import React from 'react';
 import SectionTitle from '../components/SectionTitle';
+import img31 from '../images/gh11.jpeg';
+import img32 from '../images/gh12.jpeg';
+import img33 from '../images/gh13.jpeg';
+import img34 from '../images/gh14.jpeg';
 
 const blogPosts = [
   {
-    title: '5 Benefits of Aromatherapy',
-    date: 'March 15, 2024',
-    image: 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-    excerpt: 'Discover how essential oils can transform your mental and physical state...'
+    title: 'Natural Glow',
+    date: null,
+    image: img31,
+    excerpt: null
   },
   {
-    title: 'The Art of Deep Tissue Massage',
-    date: 'March 10, 2024',
-    image: 'https://images.unsplash.com/photo-1544161515-4ae6ce6db87e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-    excerpt: 'Understand the science behind muscle recovery and tension release...'
+    title: 'Natural Glow',
+    date: null,
+    image: img32,
+    excerpt: null
   },
   {
-    title: 'Hydration: The Key to Glowing Skin',
-    date: 'March 05, 2024',
-    image: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-    excerpt: 'Why drinking water is just the beginning of your skincare journey...'
+    title: 'Natural Glow',
+    date: null,
+    image: img34,
+    excerpt: null
   }
 ];
 
@@ -27,7 +31,7 @@ const Blog = () => {
     <div className="pt-navbar">
       <div className="page-header section-padding" style={{backgroundColor: 'var(--color-dark-charcoal)', color: 'white', textAlign: 'center'}}>
         <div className="container">
-          <h1 style={{color: 'white', fontSize: '48px'}}>Wellness Blog</h1>
+          <h1 style={{color: 'white', fontSize: '48px'}}>Natural Glow Products</h1>
           <p style={{color: 'var(--color-gold)', marginTop: '10px', letterSpacing: '2px', textTransform: 'uppercase'}}>Insights for your journey</p>
         </div>
       </div>
@@ -41,7 +45,6 @@ const Blog = () => {
                 <span style={{color: 'var(--color-gold)', fontSize: '12px', textTransform: 'uppercase'}}>{post.date}</span>
                 <h3 style={{margin: '10px 0 15px', fontSize: '22px'}}>{post.title}</h3>
                 <p style={{color: '#666', marginBottom: '20px', fontSize: '15px'}}>{post.excerpt}</p>
-                <a href="#" style={{color: 'var(--color-dark-charcoal)', fontWeight: '600', textTransform: 'uppercase', fontSize: '13px', letterSpacing: '1px'}}>Read More</a>
               </div>
             </div>
           ))}

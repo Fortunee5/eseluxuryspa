@@ -95,12 +95,32 @@ const Booking = () => {
                   <div className="form-group">
                     <label>Select Service</label>
                     <select name="service" value={formData.service} onChange={handleChange}>
-                      <option>Massage Therapy</option>
-                      <option>Facial Treatment</option>
-                      <option>Aromatherapy</option>
-                      <option>Sauna Therapy</option>
-                      <option>Body Treatment</option>
-                      <option>Wellness Therapy</option>
+                      <option>Massage Therapy - ₵500</option>
+                      <option>Body sculpting - ₵200</option>
+                      <option>Teeth whitening (2 Sessions) - ₵300</option>
+                      <option>Nano peel - ₵300</option>
+                      <option>Derma glow peel - ₵700</option>
+                      <option>Body scrub - ₵500</option>
+                      <option>Lip Blush - ₵500</option>
+                      <option>Skin tag treatments - ₵500</option>
+                      <option>Fat Injections - ₵700</option>
+                      <option>Pedicure - ₵200 </option>
+                      <option>Hydra Facial - ₵250</option>
+                      <option>Deep Cleansing Facial - ₵250</option>
+                      <option>Microdermabrasion Anti-Aging Facial - ₵250</option>
+                      <option>Baby Face Treatment - ₵300</option>
+                      <option>Brightening Glow Facial - ₵300</option>
+                      <option>Dermaplaning - ₵250</option>
+                      <option>New Vampire Facial - ₵500</option>
+                      <option>Moisturizing Facial - ₵250</option>
+                      <option>Acne Facial (Deep Cleansing & Pimple Treatment) - ₵300</option>
+                      <option>Customized Facial - ₵500+</option>
+                      <option>Anti-Aging Facial - ₵400</option>
+                      <option>Kiddies Facial - ₵200</option>
+                      <option>Vajacial - ₵300</option>
+                      <option>Butt Facial ₵400</option>
+                      <option>Back Facial - ₵300</option>
+
                     </select>
                   </div>
                   <div className="form-group">

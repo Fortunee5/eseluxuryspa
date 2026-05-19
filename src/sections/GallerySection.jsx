@@ -12,13 +12,34 @@ import img8 from '../images/8.jpeg';
 import img9 from '../images/9.jpeg';
 import img10 from '../images/10.jpeg';
 import img43 from '../images/43.jpeg';
+
+import img21 from '../images/gh1.jpeg';
+import img22 from '../images/gh2.jpeg';
+
+import img23 from '../images/gh3.jpeg';
+import img24 from '../images/gh4.jpeg';
+import img25 from '../images/gh5.jpeg';
+import img26 from '../images/gh6.jpeg';
+import img27 from '../images/gh7.jpeg';
+import img28 from '../images/gh8.jpeg';
+import img29 from '../images/gh9.jpeg';
+import img30 from '../images/gh10.jpeg';
+
+import img31 from '../images/gh11.jpeg';
+import img32 from '../images/gh12.jpeg';
+import img33 from '../images/gh13.jpeg';
+import img34 from '../images/gh14.jpeg';
+
 const row1 = [
-  'https://i.pinimg.com/736x/9a/b2/d3/9ab2d33761639c9028c9d07bce52299d.jpg',
-  'https://i.pinimg.com/1200x/5c/54/f6/5c54f6a5185c228917e07ef0e4c76b0e.jpg',
-  'https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80',
-  'https://i.pinimg.com/1200x/e5/f4/88/e5f488687abd33a14c9da43a0578dd8c.jpg',
-  'https://i.pinimg.com/1200x/bd/91/e1/bd91e141e64b0cd32cf36c428fa1a595.jpg',
-  'https://i.pinimg.com/736x/6d/d8/45/6dd8452b8642822792cff922c8bf5f65.jpg',
+img23,
+img24,
+img25,
+img26,
+img27,
+img28,
+img29,
+img30,
+
 ];
 
 const row2 = [
@@ -37,10 +58,14 @@ img1,
 ];
 
 const col1 = [
-  'https://i.pinimg.com/1200x/e5/f4/88/e5f488687abd33a14c9da43a0578dd8c.jpg',
-  'https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&q=80',
-  'https://i.pinimg.com/736x/6d/d8/45/6dd8452b8642822792cff922c8bf5f65.jpg',
-  'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&q=80',
+img23,
+img24,
+img25,
+img26,
+img27,
+img28,
+img29,
+img30,
 ];
 
 const col2 = [
@@ -127,7 +152,7 @@ const GallerySection = () => {
 
         <div className="gallery-centre-card">
           <img
-            src="https://images.unsplash.com/photo-1552693673-1bf958298935?w=900&q=85"
+            src={img22}
             alt="Signature Treatment"
           />
           <div className="centre-card-content">
