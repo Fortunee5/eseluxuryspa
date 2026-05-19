@@ -110,7 +110,7 @@ const Hero = () => {
       </div>
 
       <div className="container hero-content">
-        <span ref={subRef} className="hero-subtitle">Welcome to Ese Luxury Spa</span>
+        <span ref={subRef} className="hero-subtitle">Welcome to Ese Luxury Spa & Cosmetics</span>
         <h1 ref={titleRef}>
           The Ultimate Spa <br />
           <span>Experience In Accra Ghana</span>
