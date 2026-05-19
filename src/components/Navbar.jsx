@@ -46,7 +46,7 @@ const Navbar = () => {
     <nav ref={navRef} className={`navbar ${scrolled ? 'scrolled' : ''} ${isOpen ? 'open' : ''}`}>
       <div className="container nav-container">
         <Link to="/" className="logo">
-          ESE <span>Luxury Spa</span>
+          ESE <span>Luxury Spa & Cosmetics</span>
         </Link>
 
         <div className={`nav-links ${isOpen ? 'active' : ''}`}>

@@ -52,12 +52,10 @@ const AboutSection = () => {
       <div className="container">
         <div className="about-grid">
           <div className="about-images">
-            <div className="img-large">
+            <div className="img-large floating">
               <img src={img21} alt="Spa Scene" />
             </div>
-            <div className="img-small floating">
-              <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxEME9M9cSy9FvfHvcx2gMPkp1H5Dj4YaKufPRsAyon8Tf" alt="Spa Detail" />
-            </div>
+
           </div>
 
           <div className="about-content">

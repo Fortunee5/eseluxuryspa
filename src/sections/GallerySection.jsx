@@ -30,6 +30,8 @@ import img32 from '../images/gh12.jpeg';
 import img33 from '../images/gh13.jpeg';
 import img34 from '../images/gh14.jpeg';
 
+import img35 from '../images/nailss.jpeg';
+
 const row1 = [
 img23,
 img24,
@@ -39,7 +41,7 @@ img27,
 img28,
 img29,
 img30,
-
+img35
 ];
 
 const row2 = [
@@ -66,6 +68,7 @@ img27,
 img28,
 img29,
 img30,
+img35
 ];
 
 const col2 = [

@@ -59,7 +59,7 @@ function App(): React.JSX.Element {
       <ScrollToTop />
       <CustomCursor />
       <Navbar />
-      <BookingPopup />
+      
       
       <main>
         <Routes>

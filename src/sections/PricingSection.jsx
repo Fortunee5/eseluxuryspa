@@ -13,13 +13,13 @@ const plans = [
   {
     name: 'Luxury Wellness',
     price: '500',
-    features: ['Deep Tissue Massage', 'Full Body Scrub', 'Luxury Facial', 'Sauna & Pool', 'Healthy Lunch'],
+    features: ['Deep Tissue Massage', 'Full Body Scrub', 'Luxury Facial'],
     featured: true
   },
   {
-    name: 'Fat Injections',
+    name: 'Fat Desolve Injections',
     price: '700',
-    features: ['Full Day Access', 'All Treatments', 'Private Suite', 'Premium Gift Set', 'Champagne'],
+    features: ['Full Day Access', 'All Treatments', 'Private Suite'],
     featured: false
   }
 ];

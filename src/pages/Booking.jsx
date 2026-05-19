@@ -103,7 +103,7 @@ const Booking = () => {
                       <option>Body scrub - ₵500</option>
                       <option>Lip Blush - ₵500</option>
                       <option>Skin tag treatments - ₵500</option>
-                      <option>Fat Injections - ₵700</option>
+                      <option>Fat Disolve Injections - ₵700</option>
                       <option>Pedicure - ₵200 </option>
                       <option>Hydra Facial - ₵250</option>
                       <option>Deep Cleansing Facial - ₵250</option>
@@ -120,6 +120,12 @@ const Booking = () => {
                       <option>Vajacial - ₵300</option>
                       <option>Butt Facial ₵400</option>
                       <option>Back Facial - ₵300</option>
+                      <option>Swedish Massage (1 hour) - ₵400</option>
+                      <option>Thai Massage - ₵380</option>
+                      <option>Aromatherapy Massage - ₵360</option>
+                      <option>Deep Tissue Massage - ₵300</option>
+                      <option>Hot Stone Massage (1 hour) - ₵500</option>
+                      <option>Cedis Acrylic Nails - ₵250</option>
 
                     </select>
                   </div>

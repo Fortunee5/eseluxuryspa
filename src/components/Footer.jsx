@@ -17,7 +17,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-col about">
-            <Link to="/" className="footer-logo">ESE <span>Luxury Spa</span></Link>
+            <Link to="/" className="footer-logo">ESE <span>Luxury Spa & Cosmetics</span></Link>
             <p>Providing the ultimate relaxation and wellness experience in Accra since 2019. Your journey to rejuvenation begins here.</p>
             <div className="social-links">
               <a href="#"><FaInstagram /></a>

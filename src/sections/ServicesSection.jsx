@@ -33,6 +33,11 @@ const services = [
     title: 'Nano Peel',
     image: 'https://i.pinimg.com/1200x/9a/3a/24/9a3a24993681a0505dff8629885419bc.jpg',
     description:null,
+  },
+    {
+    title: 'Nails',
+    image: 'https://i.pinimg.com/736x/d1/44/bd/d144bd080e853fdf6fa0eb15d371334c.jpg',
+    description:null,
   }
 ];
 
