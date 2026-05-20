@@ -126,7 +126,8 @@ const Booking = () => {
                       <option>Deep Tissue Massage - ₵300</option>
                       <option>Hot Stone Massage (1 hour) - ₵500</option>
                       <option>Cedis Acrylic Nails - ₵250</option>
-                      <option>Micro Needing - ₵600</option>
+                      <option>Micro Needing (Per Section) - ₵700</option>
+                      <option>Lymphatic drainage massage after care (per section) - ₵500</option>
 
                     </select>
                   </div>
