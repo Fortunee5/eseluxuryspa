@@ -3,6 +3,9 @@ import SectionTitle from '../components/SectionTitle';
 import Button from '../components/Button';
 import '../styles/Booking.css';
 
+// ✅ Paste your deployed Apps Script URL here
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycby2i5W-txKpETQEuu40VRfvNtJ8Z9F_1ZgRaDbWkNI1vyFeay1pxsVHyglrsKyysqrl/exec';
+
 const Booking = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -15,30 +18,50 @@ const Booking = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Save to localStorage for Admin
-    const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+    setIsLoading(true);
+    setError(null);
+
     const newBooking = {
       ...formData,
       id: Date.now(),
       status: 'Pending',
       createdAt: new Date().toLocaleString()
     };
-    localStorage.setItem('bookings', JSON.stringify([...existingBookings, newBooking]));
-    
-    setSubmitted(true);
-    setFormData({
-      name: '', email: '', phone: '', service: 'Massage Therapy', date: '', time: '', message: ''
-    });
 
-    setTimeout(() => setSubmitted(false), 5000);
+    // Save to localStorage for Admin dashboard (unchanged)
+    const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+    localStorage.setItem('bookings', JSON.stringify([...existingBookings, newBooking]));
+
+    // Send to Google Sheets
+    try {
+      await fetch(GOOGLE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Required for Apps Script
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newBooking)
+      });
+
+      setSubmitted(true);
+      setFormData({
+        name: '', email: '', phone: '', service: 'Massage Therapy',
+        date: '', time: '', message: ''
+      });
+      setTimeout(() => setSubmitted(false), 5000);
+
+    } catch (err) {
+      setError('Submission failed. Please try again or contact us directly.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -128,7 +151,6 @@ const Booking = () => {
                       <option>Cedis Acrylic Nails - ₵250</option>
                       <option>Micro Needing (Per Section) - ₵700</option>
                       <option>Lymphatic drainage massage after care (per section) - ₵500</option>
-
                     </select>
                   </div>
                   <div className="form-group">
@@ -162,7 +184,17 @@ const Booking = () => {
                     placeholder="Tell us any special requests"
                   ></textarea>
                 </div>
-                <Button type="submit" variant="dark">Confirm Booking</Button>
+
+                {/* Error message — no CSS changes needed, uses existing styles */}
+                {error && (
+                  <p style={{ color: 'red', marginBottom: '15px', fontSize: '14px' }}>
+                    {error}
+                  </p>
+                )}
+
+                <Button type="submit" variant="dark" disabled={isLoading}>
+                  {isLoading ? 'Submitting...' : 'Confirm Booking'}
+                </Button>
               </form>
             )}
           </div>

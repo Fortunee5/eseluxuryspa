@@ -22,7 +22,6 @@ const Footer = () => {
             <div className="social-links">
               <a href="#"><FaInstagram /></a>
               <a href="#"><FaFacebookF /></a>
-              <a href="#"><FaTwitter /></a>
               <a href="https://www.tiktok.com/@eseluxuryspagh?_r=1&_t=ZS-96Qxgm6PXrL"><FaTiktok/></a>
             </div>
           </div>
