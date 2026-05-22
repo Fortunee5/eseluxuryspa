@@ -3,7 +3,6 @@ import SectionTitle from '../components/SectionTitle';
 import Button from '../components/Button';
 import '../styles/Booking.css';
 
-// ✅ Paste your deployed Apps Script URL here
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycby2i5W-txKpETQEuu40VRfvNtJ8Z9F_1ZgRaDbWkNI1vyFeay1pxsVHyglrsKyysqrl/exec';
 
 const Booking = () => {
@@ -37,23 +36,30 @@ const Booking = () => {
       createdAt: new Date().toLocaleString()
     };
 
-    // Save to localStorage for Admin dashboard (unchanged)
+    // ✅ Save to localStorage for Admin Dashboard
     const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
     localStorage.setItem('bookings', JSON.stringify([...existingBookings, newBooking]));
 
-    // Send to Google Sheets
+    // ✅ text/plain is a "simple" request — body is never stripped by the browser
     try {
       await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
-        mode: 'no-cors', // Required for Apps Script
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
         body: JSON.stringify(newBooking)
       });
 
       setSubmitted(true);
       setFormData({
-        name: '', email: '', phone: '', service: 'Massage Therapy',
-        date: '', time: '', message: ''
+        name: '',
+        email: '',
+        phone: '',
+        service: 'Massage Therapy',
+        date: '',
+        time: '',
+        message: ''
       });
       setTimeout(() => setSubmitted(false), 5000);
 
@@ -67,11 +73,11 @@ const Booking = () => {
   return (
     <div className="booking-page section-padding">
       <div className="container">
-        <SectionTitle 
-          subtitle="Reservations" 
-          title="Book Your Sanctuary" 
+        <SectionTitle
+          subtitle="Reservations"
+          title="Book Your Sanctuary"
         />
-        
+
         <div className="booking-container">
           <div className="booking-form-wrapper">
             {submitted ? (
@@ -84,34 +90,34 @@ const Booking = () => {
                 <div className="form-grid">
                   <div className="form-group">
                     <label>Full Name</label>
-                    <input 
-                      type="text" 
-                      name="name" 
-                      value={formData.name} 
-                      onChange={handleChange} 
-                      required 
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
                       placeholder="Enter your name"
                     />
                   </div>
                   <div className="form-group">
                     <label>Email Address</label>
-                    <input 
-                      type="email" 
-                      name="email" 
-                      value={formData.email} 
-                      onChange={handleChange} 
-                      required 
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
                       placeholder="Enter your email"
                     />
                   </div>
                   <div className="form-group">
                     <label>Phone Number</label>
-                    <input 
-                      type="tel" 
-                      name="phone" 
-                      value={formData.phone} 
-                      onChange={handleChange} 
-                      required 
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
                       placeholder="Your phone number"
                     />
                   </div>
@@ -127,7 +133,7 @@ const Booking = () => {
                       <option>Lip Blush - ₵500</option>
                       <option>Skin tag treatments - ₵500</option>
                       <option>Fat Disolve Injections - ₵700</option>
-                      <option>Pedicure - ₵200 </option>
+                      <option>Pedicure - ₵200</option>
                       <option>Hydra Facial - ₵250</option>
                       <option>Deep Cleansing Facial - ₵250</option>
                       <option>Microdermabrasion Anti-Aging Facial - ₵250</option>
@@ -155,37 +161,37 @@ const Booking = () => {
                   </div>
                   <div className="form-group">
                     <label>Preferred Date</label>
-                    <input 
-                      type="date" 
-                      name="date" 
-                      value={formData.date} 
-                      onChange={handleChange} 
-                      required 
+                    <input
+                      type="date"
+                      name="date"
+                      value={formData.date}
+                      onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
                     <label>Preferred Time</label>
-                    <input 
-                      type="time" 
-                      name="time" 
-                      value={formData.time} 
-                      onChange={handleChange} 
-                      required 
+                    <input
+                      type="time"
+                      name="time"
+                      value={formData.time}
+                      onChange={handleChange}
+                      required
                     />
                   </div>
                 </div>
+
                 <div className="form-group full-width">
                   <label>Special Instructions</label>
-                  <textarea 
-                    name="message" 
-                    value={formData.message} 
-                    onChange={handleChange} 
-                    rows="4" 
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="4"
                     placeholder="Tell us any special requests"
                   ></textarea>
                 </div>
 
-                {/* Error message — no CSS changes needed, uses existing styles */}
                 {error && (
                   <p style={{ color: 'red', marginBottom: '15px', fontSize: '14px' }}>
                     {error}
