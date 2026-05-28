@@ -2,6 +2,7 @@ import React from 'react';
 import SectionTitle from '../components/SectionTitle';
 import Button from '../components/Button';
 import '../styles/PricingSection.css';
+import { useNavigate } from 'react-router-dom';
 
 const plans = [
   {
@@ -25,7 +26,9 @@ const plans = [
 ];
 
 const PricingSection = () => {
+  const navigate = useNavigate();
   return (
+    
     <section className="pricing-section section-padding">
       <div className="container">
         <SectionTitle 
@@ -49,7 +52,7 @@ const PricingSection = () => {
               </ul>
               <Button 
                 variant={plan.featured ? 'primary' : 'outline'}
-                onClick={() => window.location.href='booking'}
+                onClick={() => navigate('/booking')}
               >
                 Book Now
               </Button>
