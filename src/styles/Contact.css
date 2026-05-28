@@ -1,0 +1,161 @@
+/* ─── Page Header ─────────────────────────────────── */
+.contact-header {
+  background-color: var(--color-dark-charcoal);
+  color: white;
+  text-align: center;
+}
+
+.contact-header h1 {
+  color: white;
+  font-size: 48px;
+}
+
+.contact-header p {
+  color: var(--color-gold);
+  margin-top: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ─── Two-column Layout ───────────────────────────── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+/* ─── Left Column: Info ───────────────────────────── */
+.contact-info-col p {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.contact-detail {
+  margin-bottom: 20px;
+}
+
+.contact-detail h4 {
+  margin-bottom: 5px;
+}
+
+.contact-detail p {
+  color: #666;
+  margin-bottom: 0;
+}
+
+/* ─── Right Column: Form Card ─────────────────────── */
+.contact-form-card {
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.contact-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-form-fields input,
+.contact-form-fields textarea {
+  padding: 12px;
+  border: 1px solid var(--color-beige);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 16px; /* prevents iOS auto-zoom */
+  transition: border-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form-fields input:focus,
+.contact-form-fields textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+/* ─── Tablet (≤ 992px) ────────────────────────────── */
+@media (max-width: 992px) {
+  .contact-header h1 {
+    font-size: 38px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* ─── Large Mobile (≤ 768px) ──────────────────────── */
+@media (max-width: 768px) {
+  .contact-header h1 {
+    font-size: 32px;
+  }
+
+  .contact-header p {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+
+  .contact-grid {
+    gap: 32px;
+  }
+
+  .contact-form-card {
+    padding: 30px 24px;
+  }
+}
+
+/* ─── Small Mobile (≤ 576px) ──────────────────────── */
+@media (max-width: 576px) {
+  .contact-header h1 {
+    font-size: 26px;
+  }
+
+  .contact-header p {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .contact-grid {
+    gap: 24px;
+  }
+
+  .contact-info-col p {
+    font-size: 14px;
+  }
+
+  .contact-detail h4 {
+    font-size: 15px;
+  }
+
+  .contact-detail p {
+    font-size: 14px;
+  }
+
+  .contact-form-card {
+    padding: 24px 16px;
+    border-radius: 6px;
+  }
+
+  .contact-form-fields {
+    gap: 16px;
+  }
+
+  .contact-form-fields input,
+  .contact-form-fields textarea {
+    padding: 11px 13px;
+  }
+}
+
+/* ─── Very Small (≤ 380px) ─────────────────────────── */
+@media (max-width: 380px) {
+  .contact-header h1 {
+    font-size: 22px;
+  }
+
+  .contact-form-card {
+    padding: 20px 12px;
+  }
+}
