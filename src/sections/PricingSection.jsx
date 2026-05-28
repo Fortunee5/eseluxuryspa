@@ -49,7 +49,7 @@ const PricingSection = () => {
               </ul>
               <Button 
                 variant={plan.featured ? 'primary' : 'outline'}
-                onClick={() => window.location.href='./booking'}
+                onClick={() => window.location.href='booking'}
               >
                 Book Now
               </Button>
