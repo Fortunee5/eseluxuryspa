@@ -4,6 +4,7 @@ import SectionTitle from '../components/SectionTitle';
 import Button from '../components/Button';
 import '../styles/AboutSection.css';
 import img21 from '../images/gh1.jpeg';
+import { useNavigate } from 'react-router-dom';
 const stats = [
   { target: 10,   suffix: '+',  label: 'Years of Experience' },
   { target: 60,   suffix: '+',  label: 'Luxury Treatments' },
@@ -14,7 +15,7 @@ const AboutSection = () => {
   const featuresRef = useRef(null);
   const numRefs     = useRef([]);
   const animated    = useRef(false);
-
+const navigate = useNavigate();
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -81,7 +82,8 @@ const AboutSection = () => {
               ))}
             </div>
 
-            <Button onClick={() => window.location.href = '/about'}>Discover More</Button>
+            <Button 
+            onClick={() => navigate('/about')}>Discover More</Button>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Button from '../components/Button';
 import '../styles/Hero.css';
-
+import { useNavigate } from 'react-router-dom';
 const IMAGES = [
   'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1920&q=80',
   'https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=1920&q=80',
@@ -43,7 +43,7 @@ const Hero = () => {
   const imgRefs      = useRef([]);
   const currentIndex = useRef(0);
   const timerRef     = useRef(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const imgs = imgRefs.current;
 
@@ -116,8 +116,8 @@ const Hero = () => {
           <span>Experience In Accra Ghana</span>
         </h1>
         <div ref={btnRef} className="hero-btns">
-          <Button onClick={() => window.location.href = '/booking'}>Book Appointment</Button>
-          <Button variant="outline" onClick={() => window.location.href = '/services'}>Explore Services</Button>
+          <Button onClick={() => navigate('/booking')}>Book Appointment</Button>
+          <Button variant="outline" onClick={() => navigate('/services')}>Explore Services</Button>
         </div>
       </div>
 

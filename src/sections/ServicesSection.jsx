@@ -68,7 +68,7 @@ const ServicesSection = () => {
               </div>
               <div className="service-info">
                 <h3>{service.title}</h3>
-                <a href="/services" className="read-more">Learn More</a>
+                <a href="" className="read-more">Learn More</a>
               </div>
             </div>
           ))}
