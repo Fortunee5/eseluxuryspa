@@ -20,7 +20,7 @@ const Footer = () => {
             <Link to="/" className="footer-logo">ESE <span>Luxury Spa & Cosmetics</span></Link>
             <p>Providing the ultimate relaxation and wellness experience in Accra since 2019. Your journey to rejuvenation begins here.</p>
             <div className="social-links">
-              <a href="#"><FaInstagram /></a>
+              <a href="https://www.instagram.com/ese.luxuryspagh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><FaInstagram /></a>
               <a href="#"><FaFacebookF /></a>
               <a href="https://www.tiktok.com/@eseluxuryspagh?_r=1&_t=ZS-96Qxgm6PXrL"><FaTiktok/></a>
             </div>
