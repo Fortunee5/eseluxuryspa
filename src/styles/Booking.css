@@ -116,20 +116,141 @@
   margin-bottom: 10px;
 }
 
+/* ─── Tablet ──────────────────────────────────────── */
 @media (max-width: 992px) {
   .booking-container {
     grid-template-columns: 1fr;
   }
+
+  .booking-info {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .info-box {
+    flex: 1 1 calc(50% - 10px);
+    min-width: 260px;
+    padding: 30px;
+  }
 }
 
+/* ─── Large Mobile (≤ 768px) ──────────────────────── */
+@media (max-width: 768px) {
+  .booking-page {
+    padding-top: 100px;
+  }
+
+  .booking-container {
+    gap: 30px;
+  }
+
+  .booking-form-wrapper {
+    padding: 30px 24px;
+  }
+
+  .booking-info {
+    flex-direction: column;
+  }
+
+  .info-box {
+    flex: unset;
+    padding: 28px 24px;
+  }
+
+  .info-box h3 {
+    font-size: 19px;
+  }
+}
+
+/* ─── Small Mobile (≤ 576px) ──────────────────────── */
 @media (max-width: 576px) {
+  .booking-page {
+    padding-top: 80px;
+  }
+
+  .booking-container {
+    gap: 24px;
+  }
+
+  .booking-form-wrapper {
+    padding: 24px 16px;
+    border-radius: 6px;
+  }
+
   .form-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
   }
+
   .form-group.full-width {
     grid-column: span 1;
+    margin-bottom: 20px;
   }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 11px 13px;
+    font-size: 15px;    /* prevents iOS auto-zoom on focus (needs ≥ 16px OR we set it explicitly) */
+  }
+
+  /* iOS Safari prevents zoom when font-size >= 16px on inputs */
+  .form-group input,
+  .form-group select {
+    font-size: 16px;
+  }
+
+  .form-group textarea {
+    font-size: 16px;
+  }
+
+  .info-box {
+    padding: 24px 16px;
+  }
+
+  .info-box h3 {
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+
+  .info-box ul li {
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 14px;
+  }
+
+  .info-box ul li span {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .info-box p {
+    font-size: 13px;
+  }
+
+  .success-message {
+    padding: 24px 0;
+  }
+
+  .success-message h3 {
+    font-size: 24px;
+  }
+}
+
+/* ─── Very Small (≤ 380px) ─────────────────────────── */
+@media (max-width: 380px) {
   .booking-form-wrapper {
-    padding: 30px 20px;
+    padding: 20px 12px;
+  }
+
+  .info-box {
+    padding: 20px 14px;
   }
 }
