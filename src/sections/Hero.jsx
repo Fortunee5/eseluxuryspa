@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import '../styles/Hero.css';
 import { useNavigate } from 'react-router-dom';
 const IMAGES = [
-  'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1920&q=80',
+  'https://media.istockphoto.com/id/1484026069/photo/relaxation-woman-back-massage-with-masseur-in-cosmetology-spa-centre.jpg?s=612x612&w=0&k=20&c=vJn_Ak9VBWKnwQUeFYFk0yBiyjY7Up9zhGCfBeX9_h4=',
   'https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=1920&q=80',
   'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=1920&q=80',
 ];
