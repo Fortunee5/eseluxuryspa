@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SectionTitle from '../components/SectionTitle';
 import Button from '../components/Button';
 import '../styles/Booking.css';
@@ -6,11 +6,13 @@ import '../styles/Booking.css';
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycby2i5W-txKpETQEuu40VRfvNtJ8Z9F_1ZgRaDbWkNI1vyFeay1pxsVHyglrsKyysqrl/exec';
 
 const Booking = () => {
+  const [services, setServices] = useState([]);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    service: 'Massage Therapy',
+    service: '',
     date: '',
     time: '',
     message: ''
@@ -19,6 +21,15 @@ const Booking = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('adminServices');
+    const list = saved ? JSON.parse(saved) : [];
+    setServices(list);
+    if (list.length > 0) {
+      setFormData(prev => ({ ...prev, service: list[0].name }));
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,18 +47,14 @@ const Booking = () => {
       createdAt: new Date().toLocaleString()
     };
 
-    // ✅ Save to localStorage for Admin Dashboard
     const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
     localStorage.setItem('bookings', JSON.stringify([...existingBookings, newBooking]));
 
-    // ✅ text/plain is a "simple" request — body is never stripped by the browser
     try {
       await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
-        },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(newBooking)
       });
 
@@ -56,13 +63,12 @@ const Booking = () => {
         name: '',
         email: '',
         phone: '',
-        service: 'Massage Therapy',
+        service: services[0]?.name || '',
         date: '',
         time: '',
         message: ''
       });
       setTimeout(() => setSubmitted(false), 5000);
-
     } catch (err) {
       setError('Submission failed. Please try again or contact us directly.');
     } finally {
@@ -73,10 +79,7 @@ const Booking = () => {
   return (
     <div className="booking-page section-padding">
       <div className="container">
-        <SectionTitle
-          subtitle="Reservations"
-          title="Book Your Sanctuary"
-        />
+        <SectionTitle subtitle="Reservations" title="Book Your Sanctuary" />
 
         <div className="booking-container">
           <div className="booking-form-wrapper">
@@ -123,40 +126,16 @@ const Booking = () => {
                   </div>
                   <div className="form-group">
                     <label>Select Service</label>
-                    <select name="service" value={formData.service} onChange={handleChange}>
-                      <option>Massage Therapy - ₵500</option>
-                      <option>Body sculpting - ₵200</option>
-                      <option>Teeth whitening (2 Sessions) - ₵300</option>
-                      <option>Nano peel - ₵300</option>
-                      <option>Derma glow peel - ₵700</option>
-                      <option>Body scrub - ₵500</option>
-                      <option>Lip Blush - ₵500</option>
-                      <option>Skin tag treatments - ₵500</option>
-                      <option>Fat Disolve Injections - ₵700</option>
-                      <option>Pedicure - ₵200</option>
-                      <option>Hydra Facial - ₵250</option>
-                      <option>Deep Cleansing Facial - ₵250</option>
-                      <option>Microdermabrasion Anti-Aging Facial - ₵250</option>
-                      <option>Baby Face Treatment - ₵300</option>
-                      <option>Brightening Glow Facial - ₵300</option>
-                      <option>Dermaplaning - ₵250</option>
-                      <option>New Vampire Facial - ₵500</option>
-                      <option>Moisturizing Facial - ₵250</option>
-                      <option>Acne Facial (Deep Cleansing & Pimple Treatment) - ₵300</option>
-                      <option>Customized Facial - ₵500+</option>
-                      <option>Anti-Aging Facial - ₵400</option>
-                      <option>Kiddies Facial - ₵200</option>
-                      <option>Vajacial - ₵300</option>
-                      <option>Butt Facial ₵400</option>
-                      <option>Back Facial - ₵300</option>
-                      <option>Swedish Massage (1 hour) - ₵400</option>
-                      <option>Thai Massage - ₵380</option>
-                      <option>Aromatherapy Massage - ₵360</option>
-                      <option>Deep Tissue Massage - ₵300</option>
-                      <option>Hot Stone Massage (1 hour) - ₵500</option>
-                      <option>Cedis Acrylic Nails - ₵250</option>
-                      <option>Micro Needing (Per Section) - ₵700</option>
-                      <option>Lymphatic drainage massage after care (per section) - ₵500</option>
+                    <select name="service" value={formData.service} onChange={handleChange} required>
+                      {services.length === 0 ? (
+                        <option value="" disabled>No services available</option>
+                      ) : (
+                        services.map((svc) => (
+                          <option key={svc.id} value={svc.name}>
+                            {svc.name}{svc.price ? ` - ${svc.price}` : ''}
+                          </option>
+                        ))
+                      )}
                     </select>
                   </div>
                   <div className="form-group">
@@ -193,12 +172,10 @@ const Booking = () => {
                 </div>
 
                 {error && (
-                  <p style={{ color: 'red', marginBottom: '15px', fontSize: '14px' }}>
-                    {error}
-                  </p>
+                  <p style={{ color: 'red', marginBottom: '15px', fontSize: '14px' }}>{error}</p>
                 )}
 
-                <Button type="submit" variant="dark" disabled={isLoading}>
+                <Button type="submit" variant="dark" disabled={isLoading || services.length === 0}>
                   {isLoading ? 'Submitting...' : 'Confirm Booking'}
                 </Button>
               </form>
