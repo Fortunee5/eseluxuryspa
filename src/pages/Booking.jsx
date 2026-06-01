@@ -27,7 +27,7 @@ const Booking = () => {
     const list = saved ? JSON.parse(saved) : [];
     setServices(list);
     if (list.length > 0) {
-      setFormData(prev => ({ ...prev, service: list[0].name }));
+      setFormData(prev => ({ ...prev, service: list.name }));
     }
   }, []);
 
@@ -63,7 +63,7 @@ const Booking = () => {
         name: '',
         email: '',
         phone: '',
-        service: services[0]?.name || '',
+        service: services?.name || '',
         date: '',
         time: '',
         message: ''
@@ -132,7 +132,7 @@ const Booking = () => {
                       ) : (
                         services.map((svc) => (
                           <option key={svc.id} value={svc.name}>
-                            {svc.name}{svc.price ? ` - ${svc.price}` : ''}
+                            {svc.name}{svc.price ? ` - ₵${svc.price}` : ''}
                           </option>
                         ))
                       )}
