@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SectionTitle from '../components/SectionTitle';
 import { staggerFadeIn } from '../animations';
 import '../styles/ServicesSection.css';
 
-const services = [
+const defaultServices = [
   {
     title: 'Massage Therapy',
     image: 'https://i.pinimg.com/1200x/af/1c/80/af1c8063400cbb7b2cb5bfdee9180eeb.jpg',
@@ -32,22 +32,38 @@ const services = [
   {
     title: 'Nano Peel',
     image: 'https://i.pinimg.com/1200x/9a/3a/24/9a3a24993681a0505dff8629885419bc.jpg',
-    description:null,
+    description: null,
   },
-    {
+  {
     title: 'Nails',
     image: 'https://i.pinimg.com/736x/d1/44/bd/d144bd080e853fdf6fa0eb15d371334c.jpg',
-    description:null,
+    description: null,
   }
 ];
 
 const ServicesSection = () => {
   const gridRef = useRef(null);
+  const [adminServices, setAdminServices] = useState([]);
 
   useEffect(() => {
-    const cards = gridRef.current.querySelectorAll('.service-card');
-    staggerFadeIn(cards);
+    const saved = localStorage.getItem('sectionServices');
+    if (saved) {
+      try {
+        setAdminServices(JSON.parse(saved));
+      } catch {
+        setAdminServices([]);
+      }
+    }
   }, []);
+
+  const allServices = [...defaultServices, ...adminServices];
+
+  useEffect(() => {
+    if (gridRef.current) {
+      const cards = gridRef.current.querySelectorAll('.service-card');
+      staggerFadeIn(cards);
+    }
+  }, [adminServices]);
 
   return (
     <section className="services-section section-padding">
@@ -58,7 +74,7 @@ const ServicesSection = () => {
         />
         
         <div className="services-grid" ref={gridRef}>
-          {services.map((service, index) => (
+          {allServices.map((service, index) => (
             <div key={index} className="service-card">
               <div className="service-img">
                 <img src={service.image} alt={service.title} />

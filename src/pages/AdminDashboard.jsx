@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AdminDashboard.css';
 
@@ -15,7 +15,7 @@ const initials = (name = '') =>
 const AdminDashboard = () => {
   const [activeTab, setActiveTab]   = useState('bookings');
   const [bookings,  setBookings]    = useState([]);
-  const [expanded,  setExpanded]    = useState(null);   // id of expanded booking
+  const [expanded,  setExpanded]    = useState(null);
   const [services,  setServices]    = useState([]);
 
   const [newName,  setNewName]  = useState('');
@@ -27,6 +27,15 @@ const AdminDashboard = () => {
   const [editName,   setEditName]   = useState('');
   const [editPrice,  setEditPrice]  = useState('');
 
+  /* ── Section Services (ServicesSection cards) ── */
+  const [sectionServices,    setSectionServices]    = useState([]);
+  const [secTitle,           setSecTitle]           = useState('');
+  const [secImage,           setSecImage]           = useState(null);   // base64 string
+  const [secImageName,       setSecImageName]       = useState('');
+  const [secError,           setSecError]           = useState('');
+  const [secSuccess,         setSecSuccess]         = useState('');
+  const fileInputRef = useRef(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +44,8 @@ const AdminDashboard = () => {
     setBookings(saved.sort((a, b) => b.id - a.id));
     const savedSvc = localStorage.getItem('adminServices');
     setServices(savedSvc ? JSON.parse(savedSvc) : []);
+    const savedSec = localStorage.getItem('sectionServices');
+    setSectionServices(savedSec ? JSON.parse(savedSec) : []);
   }, [navigate]);
 
   const handleLogout = () => {
@@ -46,9 +57,18 @@ const AdminDashboard = () => {
     isError ? setSvcError(msg) : setSvcSuccess(msg);
     setTimeout(() => { setSvcError(''); setSvcSuccess(''); }, 3000);
   };
+  const flashSec = (msg, isError = false) => {
+    isError ? setSecError(msg) : setSecSuccess(msg);
+    setTimeout(() => { setSecError(''); setSecSuccess(''); }, 3000);
+  };
+
   const persist = (list) => {
     setServices(list);
     localStorage.setItem('adminServices', JSON.stringify(list));
+  };
+  const persistSec = (list) => {
+    setSectionServices(list);
+    localStorage.setItem('sectionServices', JSON.stringify(list));
   };
 
   const deleteBooking = (id) => {
@@ -92,6 +112,39 @@ const AdminDashboard = () => {
 
   const toggleExpand = (id) => setExpanded(prev => prev === id ? null : id);
 
+  /* ── Section Service handlers ── */
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      flashSec('Please select a valid image file.', true); return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      flashSec('Image must be under 5 MB.', true); return;
+    }
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      setSecImage(ev.target.result);
+      setSecImageName(file.name);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSecAdd = () => {
+    const title = secTitle.trim();
+    if (!title)    { flashSec('Title is required.', true); return; }
+    if (!secImage) { flashSec('Please upload an image.', true); return; }
+    persistSec([...sectionServices, { id: Date.now(), title, image: secImage }]);
+    setSecTitle(''); setSecImage(null); setSecImageName('');
+    if (fileInputRef.current) fileInputRef.current.value = '';
+    flashSec('Service card added!');
+  };
+
+  const handleSecDelete = (id) => {
+    persistSec(sectionServices.filter(s => s.id !== id));
+    flashSec('Service card removed.');
+  };
+
   return (
     <div className="admin-dashboard">
 
@@ -105,6 +158,10 @@ const AdminDashboard = () => {
             </button>
             <button className={`tab-btn ${activeTab === 'services'  ? 'active' : ''}`} onClick={() => setActiveTab('services')}>
               Manage Services
+            </button>
+            <button className={`tab-btn ${activeTab === 'section-services' ? 'active' : ''}`} onClick={() => setActiveTab('section-services')}>
+              Services Section
+              {sectionServices.length > 0 && <span className="tab-badge">{sectionServices.length}</span>}
             </button>
             <button className="logout-btn" onClick={handleLogout}>Logout</button>
           </div>
@@ -305,6 +362,111 @@ const AdminDashboard = () => {
             </div>
           </div>
         )}
+
+        {/* ══════════ SECTION SERVICES TAB ══════════ */}
+        {activeTab === 'section-services' && (
+          <div className="services-section">
+            <h2 className="section-heading">Services Section Cards</h2>
+            <p className="section-hint">
+              Cards you add here appear in the <strong>Services Section</strong> on the homepage alongside the default services.
+            </p>
+
+            {secError   && <p className="svc-msg error">{secError}</p>}
+            {secSuccess && <p className="svc-msg success">{secSuccess}</p>}
+
+            {/* Add card */}
+            <div className="section-card add-card">
+              <h3 className="card-heading">Add New Service Card</h3>
+
+              <div className="sec-add-form">
+                {/* Title input */}
+                <div className="sec-field">
+                  <label className="sec-label">Service Title</label>
+                  <input
+                    className="svc-input"
+                    type="text"
+                    placeholder="e.g. Eyebrow Threading"
+                    value={secTitle}
+                    onChange={e => setSecTitle(e.target.value)}
+                    onKeyDown={e => e.key === 'Enter' && handleSecAdd()}
+                  />
+                </div>
+
+                {/* Image upload */}
+                <div className="sec-field">
+                  <label className="sec-label">Service Image</label>
+                  <div className="sec-upload-area" onClick={() => fileInputRef.current && fileInputRef.current.click()}>
+                    {secImage ? (
+                      <div className="sec-preview-wrap">
+                        <img src={secImage} alt="preview" className="sec-preview-img" />
+                        <span className="sec-preview-name">{secImageName}</span>
+                      </div>
+                    ) : (
+                      <div className="sec-upload-placeholder">
+                        <span className="sec-upload-icon">🖼️</span>
+                        <span className="sec-upload-text">Click to upload image</span>
+                        <span className="sec-upload-hint">JPG, PNG, WEBP · max 5 MB</span>
+                      </div>
+                    )}
+                  </div>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    onChange={handleImageChange}
+                  />
+                  {secImage && (
+                    <button
+                      className="sec-clear-btn"
+                      onClick={() => { setSecImage(null); setSecImageName(''); if (fileInputRef.current) fileInputRef.current.value = ''; }}
+                    >
+                      ✕ Remove image
+                    </button>
+                  )}
+                </div>
+
+                <button className="add-btn sec-submit-btn" onClick={handleSecAdd}>
+                  + Add Service Card
+                </button>
+              </div>
+            </div>
+
+            {/* Current section services */}
+            <div className="section-card">
+              <h3 className="card-heading">
+                Added Cards <span className="svc-count">({sectionServices.length})</span>
+              </h3>
+
+              {sectionServices.length === 0 ? (
+                <div className="empty-state">
+                  <div className="empty-icon">🖼️</div>
+                  <p>No cards added yet. Use the form above to add one.</p>
+                </div>
+              ) : (
+                <div className="sec-cards-grid">
+                  {sectionServices.map((item) => (
+                    <div className="sec-card-item" key={item.id}>
+                      <div className="sec-card-img-wrap">
+                        <img src={item.image} alt={item.title} className="sec-card-img" />
+                      </div>
+                      <div className="sec-card-footer">
+                        <span className="sec-card-title">{item.title}</span>
+                        <button
+                          className="action-delete sec-delete-btn"
+                          onClick={() => handleSecDelete(item.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
