@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SectionTitle from '../components/SectionTitle';
 import { staggerFadeIn } from '../animations';
 import '../styles/ServicesSection.css';
+
+const API = 'https://eseluxuryspa.co/';
 
 const defaultServices = [
   {
@@ -38,53 +41,66 @@ const defaultServices = [
     title: 'Nails',
     image: 'https://i.pinimg.com/736x/d1/44/bd/d144bd080e853fdf6fa0eb15d371334c.jpg',
     description: null,
-  }
+  },
 ];
 
 const ServicesSection = () => {
-  const gridRef = useRef(null);
-  const [adminServices, setAdminServices] = useState([]);
+  const gridRef      = useRef(null);
+  const navigate     = useNavigate();
+  const [adminCards, setAdminCards] = useState([]);
 
+  /* Fetch admin-uploaded cards from the server on mount */
   useEffect(() => {
-    const saved = localStorage.getItem('sectionServices');
-    if (saved) {
-      try {
-        setAdminServices(JSON.parse(saved));
-      } catch {
-        setAdminServices([]);
-      }
-    }
+    fetch(`${API}/api/section-services`)
+      .then(r => r.json())
+      .then(data => setAdminCards(Array.isArray(data) ? data : []))
+      .catch(() => setAdminCards([])); // silently fail — defaults still show
   }, []);
 
-  const allServices = [...defaultServices, ...adminServices];
+  const allServices = [
+    ...defaultServices,
+    ...adminCards.map(c => ({ title: c.title, image: `${API}${c.image}`, description: null })),
+  ];
 
   useEffect(() => {
     if (gridRef.current) {
       const cards = gridRef.current.querySelectorAll('.service-card');
       staggerFadeIn(cards);
     }
-  }, [adminServices]);
+  }, [adminCards]);
+
+  const handleCardClick = () => {
+    navigate('/booking');
+  };
 
   return (
     <section className="services-section section-padding">
       <div className="container">
-        <SectionTitle 
-          subtitle="Our Luxury Services" 
-          title="Pure Bliss & Relaxation" 
+        <SectionTitle
+          subtitle="Our Luxury Services"
+          title="Pure Bliss & Relaxation"
         />
-        
+
         <div className="services-grid" ref={gridRef}>
           {allServices.map((service, index) => (
-            <div key={index} className="service-card">
+            <div
+              key={index}
+              className="service-card service-card--clickable"
+              onClick={handleCardClick}
+              role="button"
+              tabIndex={0}
+              onKeyDown={e => e.key === 'Enter' && handleCardClick()}
+              aria-label={`Book ${service.title}`}
+            >
               <div className="service-img">
                 <img src={service.image} alt={service.title} />
                 <div className="service-overlay">
                   <p>{service.description}</p>
+                  <span className="service-book-cta">Book Now →</span>
                 </div>
               </div>
               <div className="service-info">
                 <h3>{service.title}</h3>
-               
               </div>
             </div>
           ))}
