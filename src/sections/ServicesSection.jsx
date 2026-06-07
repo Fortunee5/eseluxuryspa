@@ -4,7 +4,7 @@ import SectionTitle from '../components/SectionTitle';
 import { staggerFadeIn } from '../animations';
 import '../styles/ServicesSection.css';
 
-const API = 'https://eseluxuryspa.co/';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycby2i5W-txKpETQEuu40VRfvNtJ8Z9F_1ZgRaDbWkNI1vyFeay1pxsVHyglrsKyysqrl/exec';
 
 const defaultServices = [
   {
@@ -45,21 +45,20 @@ const defaultServices = [
 ];
 
 const ServicesSection = () => {
-  const gridRef      = useRef(null);
-  const navigate     = useNavigate();
+  const gridRef    = useRef(null);
+  const navigate   = useNavigate();
   const [adminCards, setAdminCards] = useState([]);
 
-  /* Fetch admin-uploaded cards from the server on mount */
   useEffect(() => {
-    fetch(`${API}/api/section-services`)
+    fetch(`${GAS_URL}?type=sectionServices`)
       .then(r => r.json())
       .then(data => setAdminCards(Array.isArray(data) ? data : []))
-      .catch(() => setAdminCards([])); // silently fail — defaults still show
+      .catch(() => setAdminCards([]));
   }, []);
 
   const allServices = [
     ...defaultServices,
-    ...adminCards.map(c => ({ title: c.title, image: `${API}${c.image}`, description: null })),
+    ...adminCards.map(c => ({ title: c.title, image: c.image, description: null })),
   ];
 
   useEffect(() => {
@@ -69,9 +68,7 @@ const ServicesSection = () => {
     }
   }, [adminCards]);
 
-  const handleCardClick = () => {
-    navigate('/booking');
-  };
+  const handleCardClick = () => navigate('/booking');
 
   return (
     <section className="services-section section-padding">
@@ -80,7 +77,6 @@ const ServicesSection = () => {
           subtitle="Our Luxury Services"
           title="Pure Bliss & Relaxation"
         />
-
         <div className="services-grid" ref={gridRef}>
           {allServices.map((service, index) => (
             <div

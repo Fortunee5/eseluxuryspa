@@ -3,37 +3,35 @@ import SectionTitle from '../components/SectionTitle';
 import Button from '../components/Button';
 import '../styles/Booking.css';
 
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycby2i5W-txKpETQEuu40VRfvNtJ8Z9F_1ZgRaDbWkNI1vyFeay1pxsVHyglrsKyysqrl/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycby2i5W-txKpETQEuu40VRfvNtJ8Z9F_1ZgRaDbWkNI1vyFeay1pxsVHyglrsKyysqrl/exec';
 
 const Booking = () => {
-  const [services, setServices] = useState([]);
+  const [services,  setServices]  = useState([]);
+  const [svcLoading, setSvcLoading] = useState(true);
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    date: '',
-    time: '',
-    message: ''
+    name: '', email: '', phone: '',
+    service: '', date: '', time: '', message: ''
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error,     setError]     = useState(null);
 
+  // Load services from Google Sheet (visible to all devices)
   useEffect(() => {
-    const saved = localStorage.getItem('adminServices');
-    const list = saved ? JSON.parse(saved) : [];
-    setServices(list);
-    if (list.length > 0) {
-      setFormData(prev => ({ ...prev, service: list.name }));
-    }
+    fetch(`${GAS_URL}?type=adminServices`)
+      .then(r => r.json())
+      .then(data => {
+        const list = Array.isArray(data) ? data : [];
+        setServices(list);
+        if (list.length > 0) setFormData(prev => ({ ...prev, service: list[0].name }));
+      })
+      .catch(() => setServices([]))
+      .finally(() => setSvcLoading(false));
   }, []);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,29 +45,23 @@ const Booking = () => {
       createdAt: new Date().toLocaleString()
     };
 
-    const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
-    localStorage.setItem('bookings', JSON.stringify([...existingBookings, newBooking]));
+    // Still save to localStorage so admin dashboard on THIS device can see it
+    const existing = JSON.parse(localStorage.getItem('bookings') || '[]');
+    localStorage.setItem('bookings', JSON.stringify([...existing, newBooking]));
 
     try {
-      await fetch(GOOGLE_SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
+      // action omitted = legacy booking path in Apps Script
+      await fetch(GAS_URL, {
+        method : 'POST',
+        mode   : 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(newBooking)
+        body   : JSON.stringify(newBooking),
       });
 
       setSubmitted(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: services?.name || '',
-        date: '',
-        time: '',
-        message: ''
-      });
+      setFormData({ name: '', email: '', phone: '', service: services[0]?.name || '', date: '', time: '', message: '' });
       setTimeout(() => setSubmitted(false), 5000);
-    } catch (err) {
+    } catch {
       setError('Submission failed. Please try again or contact us directly.');
     } finally {
       setIsLoading(false);
@@ -93,41 +85,22 @@ const Booking = () => {
                 <div className="form-grid">
                   <div className="form-group">
                     <label>Full Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder="Enter your name"
-                    />
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Enter your name" />
                   </div>
                   <div className="form-group">
                     <label>Email Address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder="Enter your email"
-                    />
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="Enter your email" />
                   </div>
                   <div className="form-group">
                     <label>Phone Number</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required
-                      placeholder="Your phone number"
-                    />
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required placeholder="Your phone number" />
                   </div>
                   <div className="form-group">
                     <label>Select Service</label>
                     <select name="service" value={formData.service} onChange={handleChange} required>
-                      {services.length === 0 ? (
+                      {svcLoading ? (
+                        <option value="" disabled>Loading services…</option>
+                      ) : services.length === 0 ? (
                         <option value="" disabled>No services available</option>
                       ) : (
                         services.map((svc) => (
@@ -140,43 +113,23 @@ const Booking = () => {
                   </div>
                   <div className="form-group">
                     <label>Preferred Date</label>
-                    <input
-                      type="date"
-                      name="date"
-                      value={formData.date}
-                      onChange={handleChange}
-                      required
-                    />
+                    <input type="date" name="date" value={formData.date} onChange={handleChange} required />
                   </div>
                   <div className="form-group">
                     <label>Preferred Time</label>
-                    <input
-                      type="time"
-                      name="time"
-                      value={formData.time}
-                      onChange={handleChange}
-                      required
-                    />
+                    <input type="time" name="time" value={formData.time} onChange={handleChange} required />
                   </div>
                 </div>
 
                 <div className="form-group full-width">
                   <label>Special Instructions</label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows="4"
-                    placeholder="Tell us any special requests"
-                  ></textarea>
+                  <textarea name="message" value={formData.message} onChange={handleChange} rows="4" placeholder="Tell us any special requests"></textarea>
                 </div>
 
-                {error && (
-                  <p style={{ color: 'red', marginBottom: '15px', fontSize: '14px' }}>{error}</p>
-                )}
+                {error && <p style={{ color: 'red', marginBottom: '15px', fontSize: '14px' }}>{error}</p>}
 
-                <Button type="submit" variant="dark" disabled={isLoading || services.length === 0}>
-                  {isLoading ? 'Submitting...' : 'Confirm Booking'}
+                <Button type="submit" variant="dark" disabled={isLoading || services.length === 0 || svcLoading}>
+                  {isLoading ? 'Submitting…' : 'Confirm Booking'}
                 </Button>
               </form>
             )}
