@@ -39,8 +39,8 @@ const Footer = () => {
 
           <div className="footer-col contact">
             <h3>Contact Us</h3>
-            <p>61 lokko road osu beside karena cake<br />Accra, Ghana</p>
-            <p>Phone: 0534533217 0500169264</p>
+            <p>61 lokko road osu beside karena cake<br />Accra, Ghana.<br /> 18 balogun taiwo close Ikeja <br /> Lagos, Nigeria</p>
+            <p>Phone: 0534533217 0500169264<br /> +2349023495565</p>
             <p>Email: hello@eseluxuryspa.com</p>
           </div>
 
