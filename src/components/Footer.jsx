@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaInstagram, FaFacebookF, FaTwitter, FaPinterestP, FaTiktok } from 'react-icons/fa';
+import { FaInstagram, FaFacebookF, FaTwitter, FaPinterestP, FaTiktok, FaMapMarkerAlt, FaDirections } from 'react-icons/fa';
 import '../styles/Footer.css';
 
 const Footer = () => {
@@ -11,6 +11,28 @@ const Footer = () => {
     e.preventDefault();
     navigate('/admin-login');
   };
+
+  // No external map images/iframes here at all — the "map" look is drawn
+  // with pure CSS on a black background (see .map-frame-wrap in Footer.css),
+  // so there is zero network request and nothing that can lag or fail to load.
+  // "Directions" opens the precise, fully interactive location in Google Maps
+  // in a new tab, so nothing heavy ever runs on your own page.
+  const locations = [
+    {
+      id: 'lagos',
+      city: 'Lagos, Nigeria',
+      address: '18 Balogun Taiwo Close, Ikeja, Lagos, Nigeria',
+      directionsUrl:
+        'https://www.google.com/maps/dir/?api=1&destination=18+Balogun+Taiwo+Close,+Ikeja,+Lagos,+Nigeria',
+    },
+    {
+      id: 'accra',
+      city: 'Accra, Ghana',
+      address: '61 Lokko Road, Osu (beside Karena Cake), Accra, Ghana',
+      directionsUrl:
+        'https://www.google.com/maps/dir/?api=1&destination=61+Lokko+Road,+Osu,+Accra,+Ghana',
+    },
+  ];
 
   return (
     <footer className="footer">
@@ -39,8 +61,8 @@ const Footer = () => {
 
           <div className="footer-col contact">
             <h3>Contact Us</h3>
-            <p>61 lokko road osu beside karena cake<br />Accra, Ghana</p>
-            <p>Phone: 0534533217 0500169264</p>
+            <p>61 lokko road osu beside karena cake<br />Accra, Ghana.<br /> 18 balogun taiwo close Ikeja <br /> Lagos, Nigeria</p>
+            <p>Phone: 0534533217 0500169264<br /> +2349023495565</p>
             <p>Email: hello@eseluxuryspa.com</p>
           </div>
 
@@ -51,6 +73,40 @@ const Footer = () => {
               <input type="email" placeholder="Your Email Address" />
               <button type="submit">Join</button>
             </form>
+          </div>
+        </div>
+
+        <div className="footer-maps">
+          <h3 className="footer-maps-title">Visit Us</h3>
+          <div className="footer-maps-grid">
+            {locations.map((loc) => (
+              <a
+                className="map-card"
+                key={loc.id}
+                href={loc.directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="map-frame-wrap" role="img" aria-label={`Map location - ${loc.city}`}>
+                  <span className="map-pin-overlay">
+                    <FaMapMarkerAlt />
+                  </span>
+                </div>
+                <div className="map-card-info">
+                  <div className="map-card-text">
+                    <span className="map-card-city">
+                      <FaMapMarkerAlt className="map-pin-icon" />
+                      {loc.city}
+                    </span>
+                    <p>{loc.address}</p>
+                  </div>
+                  <span className="map-directions-btn">
+                    <FaDirections />
+                    Directions
+                  </span>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
 

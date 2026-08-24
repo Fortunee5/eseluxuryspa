@@ -105,6 +105,156 @@
   font-weight: 600;
 }
 
+/* ===== Visit Us / Maps Section ===== */
+
+.footer-maps {
+  margin-bottom: 60px;
+  padding-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-maps-title {
+  color: var(--color-white);
+  font-size: 20px;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.footer-maps-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: var(--color-gold);
+}
+
+.footer-maps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.map-card {
+  position: relative;
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: var(--transition-smooth, all 0.3s ease);
+  isolation: isolate;
+  text-decoration: none;
+  color: inherit;
+}
+
+.map-card:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+}
+
+/* Pure-CSS "map" look: solid black base + faint grid lines + a couple of
+   soft "road" streaks. No image file, no network request — renders instantly
+   and can never fail to load or cause lag. */
+.map-frame-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: #0a0a0a;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(120deg, transparent 46%, rgba(212, 175, 55, 0.1) 47%, rgba(212, 175, 55, 0.1) 49%, transparent 50%),
+    linear-gradient(35deg, transparent 64%, rgba(255, 255, 255, 0.05) 65%, rgba(255, 255, 255, 0.05) 66%, transparent 67%),
+    radial-gradient(circle at 50% 42%, rgba(212, 175, 55, 0.12), transparent 55%);
+  background-size: 34px 34px, 34px 34px, 100% 100%, 100% 100%, 100% 100%;
+  transition: background-color 0.4s ease;
+}
+
+.map-card:hover .map-frame-wrap {
+  background-color: #101010;
+}
+
+.map-pin-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-size: 16px;
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.6);
+  rotate: -45deg;
+}
+
+.map-pin-overlay svg {
+  rotate: 45deg;
+}
+
+.map-card-info {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.85));
+}
+
+.map-card-text {
+  min-width: 0;
+}
+
+.map-card-city {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.map-pin-icon {
+  color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.map-card-text p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13.5px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.map-directions-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background-color: var(--color-gold);
+  color: var(--color-white);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: var(--transition-smooth, all 0.3s ease);
+}
+
+.map-card:hover .map-directions-btn {
+  background-color: var(--color-white);
+  color: var(--color-dark-charcoal);
+}
+
 .footer-bottom {
   padding-top: 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -127,6 +277,22 @@
 @media (max-width: 992px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-maps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .map-card-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .map-directions-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
